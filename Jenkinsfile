@@ -10,19 +10,19 @@ pipeline {
         stage('Build') {
             steps{
                 echo "Compilando e/ou baixando dependencias"
-                sh 'cd backend && bundle install'
+                sh 'bundle install'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Executando tests'
-                sh 'cd backend && rspec -fd --format RspecJunitFormatter --out rspec.xml'
+                sh 'rspec -fd --format RspecJunitFormatter --out rspec.xml'
                 
             }
             post {
                 always {
-                    junit 'backend/rspec.xml'
+                    junit 'rspec.xml'
                 }
             }
         }
